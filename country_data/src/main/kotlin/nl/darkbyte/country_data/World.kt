@@ -8,7 +8,7 @@ import nl.darkbyte.country_data.exception.CountryDataException
 import nl.darkbyte.country_data.model.Continent
 import nl.darkbyte.country_data.model.Country
 import nl.darkbyte.country_data.model.Currency
-import nl.darkbyte.country_data.moshi.CountryAdapterFactory
+import nl.darkbyte.country_data.moshi.LocalCountryAdapterFactory
 
 object World {
     private lateinit var currencyList: Map<String, Currency>
@@ -29,7 +29,7 @@ object World {
 
     private fun setupMoshi(context: Context): Moshi {
         return Moshi.Builder()
-            .add(CountryAdapterFactory(context))
+            .add(LocalCountryAdapterFactory(context))
             .build()
     }
 
