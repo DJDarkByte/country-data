@@ -1,11 +1,9 @@
 package nl.darkbyte.country_data.model
 
 import androidx.annotation.DrawableRes
-import com.squareup.moshi.JsonClass
 import nl.darkbyte.country_data.World
 import java.util.*
 
-@JsonClass(generateAdapter = true)
 data class Country(
     val name: String,
     val alpha2: String,

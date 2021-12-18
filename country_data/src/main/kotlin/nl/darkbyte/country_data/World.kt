@@ -73,7 +73,7 @@ object World {
     }
 
     @DrawableRes
-    internal fun getFlagOf(code: String): Int {
+    fun getFlagOf(code: String): Int {
         checkIsInitialized()
         return getCountryFrom(code).flagResource
     }
