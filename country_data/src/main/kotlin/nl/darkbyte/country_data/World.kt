@@ -21,7 +21,7 @@ object World {
         R.drawable.flag_globe
     )
 
-    fun init(context: Context) {
+    internal fun init(context: Context) {
         val moshi = setupMoshi(context)
         currencyList = parseCurrencyList(context, moshi).map { it.country to it }.toMap()
         countryList = parseCountryList(context, moshi).sortedBy { it.name }
