@@ -3,7 +3,7 @@ package nl.darkbyte.country_data
 import android.content.Context
 import androidx.annotation.RawRes
 
-object AssetsReader {
+internal object AssetsReader {
     /**
      * Read contents from a file in the raw directory
      *

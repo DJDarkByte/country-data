@@ -6,7 +6,7 @@ import com.squareup.moshi.Moshi
 import nl.darkbyte.country_data.model.Country
 import java.lang.reflect.Type
 
-class CountryAdapterFactory(private val context: Context) : JsonAdapter.Factory {
+internal class CountryAdapterFactory(private val context: Context) : JsonAdapter.Factory {
     override fun create(
         type: Type,
         annotations: MutableSet<out Annotation>,

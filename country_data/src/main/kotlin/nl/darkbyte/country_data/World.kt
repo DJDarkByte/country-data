@@ -13,13 +13,18 @@ import nl.darkbyte.country_data.moshi.CountryAdapterFactory
 object World {
     private lateinit var currencyList: Map<String, Currency>
     private lateinit var countryList: List<Country>
-    private lateinit var universe: Country
+    private val universe = Country(
+        "World",
+        "xx",
+        "xxx",
+        Continent.UNIVERSE,
+        R.drawable.flag_globe
+    )
 
     fun init(context: Context) {
         val moshi = setupMoshi(context)
         currencyList = parseCurrencyList(context, moshi).map { it.country to it }.toMap()
         countryList = parseCountryList(context, moshi).sortedBy { it.name }
-        universe = getCountryFrom("xx")
     }
 
     private fun setupMoshi(context: Context): Moshi {

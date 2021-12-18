@@ -1510,11 +1510,5 @@
     "alpha3": "ZWE",
     "continent": "AF",
     "name": "Zimbabwe"
-  },
-  {
-    "alpha2": "xx",
-    "alpha3": "xxx",
-    "continent": "UNX",
-    "name": "World"
   }
 ]

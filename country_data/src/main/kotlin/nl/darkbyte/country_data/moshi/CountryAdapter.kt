@@ -19,7 +19,7 @@ import nl.darkbyte.country_data.model.Country
 import kotlin.Int
 import kotlin.String
 
-public class CountryAdapter(private val context: Context, moshi: Moshi) : JsonAdapter<Country>() {
+internal class CountryAdapter(private val context: Context, moshi: Moshi) : JsonAdapter<Country>() {
     private val options: JsonReader.Options =
         JsonReader.Options.of("name", "alpha2", "alpha3", "continent")
 
