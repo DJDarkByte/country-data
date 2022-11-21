@@ -8,6 +8,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import java.util.regex.Pattern
 
 @RunWith(JUnit4::class)
 class WorldTest {
@@ -67,6 +68,17 @@ class WorldTest {
                     currency.name)
         }
         log("Currency list size= " + currencies.size)
+    }
+
+    @Test
+    fun validateNlPostalCode() {
+        val regex = World.getPostalCodeRegexOf("NL")
+        Assert.assertNotNull("There is no validation rule for NL", regex)
+        if(regex == null) return
+        val postalCode = "1234 LL"
+        val pattern = Pattern.compile(regex)
+        val matcher = pattern.matcher(postalCode)
+        Assert.assertTrue("Postal code doesn't match regex for NL", matcher.matches())
     }
 
     @Test
