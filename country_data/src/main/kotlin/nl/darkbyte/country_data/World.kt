@@ -8,11 +8,14 @@ import nl.darkbyte.country_data.exception.CountryDataException
 import nl.darkbyte.country_data.model.Continent
 import nl.darkbyte.country_data.model.Country
 import nl.darkbyte.country_data.model.Currency
+import nl.darkbyte.country_data.model.PostalCodeValidation
 import nl.darkbyte.country_data.moshi.LocalCountryAdapterFactory
 
 object World {
     private lateinit var currencyList: Map<String, Currency>
     private lateinit var countryList: List<Country>
+    private lateinit var postalCodeValidationList: Map<String, PostalCodeValidation>
+
     private val universe = Country(
         "World",
         "xx",
@@ -23,7 +26,8 @@ object World {
 
     internal fun init(context: Context) {
         val moshi = setupMoshi(context)
-        currencyList = parseCurrencyList(context, moshi).map { it.country to it }.toMap()
+        currencyList = parseCurrencyList(context, moshi).associateBy { it.country }
+        postalCodeValidationList = parsePostalCodesValidationList(context, moshi).associateBy { it.country }
         countryList = parseCountryList(context, moshi).sortedBy { it.name }
     }
 
@@ -44,6 +48,13 @@ object World {
         val countryListType = Types.newParameterizedType(List::class.java, Country::class.java)
         return AssetsReader.readFromAssets(context, R.raw.countries)?.let { json ->
             moshi.adapter<List<Country>>(countryListType).fromJson(json)
+        } ?: emptyList()
+    }
+
+    private fun parsePostalCodesValidationList(context: Context, moshi: Moshi): List<PostalCodeValidation> {
+        val postalCodeValidationListType = Types.newParameterizedType(List::class.java, PostalCodeValidation::class.java)
+        return AssetsReader.readFromAssets(context, R.raw.postal_codes)?.let { json ->
+            moshi.adapter<List<PostalCodeValidation>>(postalCodeValidationListType).fromJson(json)
         } ?: emptyList()
     }
 
@@ -75,6 +86,11 @@ object World {
     fun getCurrencyForCountryCode(code: String): Currency {
         checkIsInitialized()
         return currencyList[code] ?: currencyList.getValue("xx")
+    }
+
+    fun getPostalCodeRegexOf(code: String): String? {
+        checkIsInitialized()
+        return postalCodeValidationList[code]?.regex
     }
 
     @DrawableRes
