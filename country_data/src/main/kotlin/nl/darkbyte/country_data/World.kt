@@ -88,9 +88,9 @@ object World {
         return currencyList[code] ?: currencyList.getValue("xx")
     }
 
-    fun getPostalCodeRegexOf(code: String): String? {
+    fun getPostalCodeRegexOf(code: String): String {
         checkIsInitialized()
-        return postalCodeValidationList[code]?.regex
+        return postalCodeValidationList[code]?.regex ?: ".*"
     }
 
     @DrawableRes

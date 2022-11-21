@@ -74,7 +74,6 @@ class WorldTest {
     fun validateNlPostalCode() {
         val regex = World.getPostalCodeRegexOf("NL")
         Assert.assertNotNull("There is no validation rule for NL", regex)
-        if(regex == null) return
         val postalCode = "1234 LL"
         val pattern = Pattern.compile(regex)
         val matcher = pattern.matcher(postalCode)
